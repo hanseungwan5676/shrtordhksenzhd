@@ -24,7 +24,7 @@ async def on_message(message):
     if message.content.startswith("(test"):
         music_name = message.content.split("test ")[1]  
         
-        chrome = webdriver.Chrome(executable_path=r"C:\Users\hsehe\Desktop\한승완 동아리 관련 자료 절대 접근 금지\chromedriver-win64\chromedriver-win64\chromedriver.exe")
+        chrome = webdriver.Chrome(executable_path=r"C:\Users\hsehe\Desktop\한승완 동아리 지울거면 좀 물어보고 지워라 제발\chromedriver-win64\chromedriver-win64\chromedriver.exe" )
         chrome.get(f"https://www.youtube.com/results?search_query={music_name}")
         page_data = chrome.page_source
         parsing_data = BeautifulSoup(page_data, 'lxml')
@@ -33,10 +33,10 @@ async def on_message(message):
         
         music_selection = discord.Embed(title=f"Music Selection", description=f"Select track with (play 1~5", color=0x35B62C)
         music_selection.add_field(name=f"1️⃣ : {music_title[0].text.strip()}", value='(play 1', inline=False)
-        music_selection.add_field(name=f"2️⃣ : {music_title[0].text.strip()}", value='(play 2', inline=False)
-        music_selection.add_field(name=f"3️⃣ : {music_title[0].text.strip()}", value='(play 3', inline=False)
-        music_selection.add_field(name=f"4️⃣ : {music_title[0].text.strip()}", value='(play 4', inline=False)
-        music_selection.add_field(name=f"5️⃣ : {music_title[0].text.strip()}", value='(play 5', inline=False)
+        music_selection.add_field(name=f"2️⃣ : {music_title[1].text.strip()}", value='(play 2', inline=False)
+        music_selection.add_field(name=f"3️⃣ : {music_title[2].text.strip()}", value='(play 3', inline=False)
+        music_selection.add_field(name=f"4️⃣ : {music_title[3].text.strip()}", value='(play 4', inline=False)
+        music_selection.add_field(name=f"5️⃣ : {music_title[4].text.strip()}", value='(play 5', inline=False)
         music_station = await message.channel.send(embed=music_selection)
         
         def check(m):
@@ -49,7 +49,7 @@ async def on_message(message):
         else:
             select_num = int(m_data.content.split(' ')[1]) -1
             
-        musicurl = music_title[select_num].get('herf')
+        musicurl = music_title[select_num].get('href')
         url = f'https://www.youtube.com{musicurl}'
         
         YDL_OPTIONS = {'format':'bestaudio','noplaylist':'True','outtmpl':f"test/{music_name}.mp3"}
