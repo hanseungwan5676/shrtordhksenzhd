@@ -21,13 +21,43 @@ async def on_ready():
 async def on_message(message):
     if message.content == "(in":
         await message.author.voice.channel.connect()
+    
         
     if message.content == "(out":
         await message.guild.voice_client.disconnect()
+        
+    if message.content == "(pause":
+        for vc in client.voice_clients:
+            if vc.guild == message.guild:
+                voice = vc
+        try:
+            voice.pause()
+            await message.channel.send(embed=discord.Embed(title=f"🤚 Pause", description="pause the music", color=0xFFFFFF))
+        except:
+            await message.channel.send(embed=discord.Embed(title=f"😯 NOW", description="Not Playing", color=0xFF992))
+    if message.content == "(resume":
+        for vc in client.voice_clients:
+            if vc.guild == message.guild:
+                voice = vc
+        try:
+            voice.resume()
+            await message.channel.send(embed=discord.Embed(title=f"🎵 Resume", description="resume the music", color=0xFFFFFF))
+        except:
+            await message.channel.send(embed=discord.Embed(title=f"😯 NOW", description="Not Playing", color=0xFF992))
+    if message.content == "(stop":
+        for vc in client.voice_clients:
+            if vc.guild == message.guild:
+                voice = vc
+        try:
+            voice.stop()
+            await message.channel.send(embed=discord.Embed(title=f"🤚 Stop", description="stop9 the music", color=0xFFFFFF))
+        except:
+            await message.channel.send(embed=discord.Embed(title=f"😯 NOW", description="Not Playing", color=0xFF992))
+    
     if message.content.startswith("(test"):
         music_name = message.content.split("test ")[1]  
         
-        driver_path =r"C:\Users\hsehe\Desktop\한승완 동아리 지울거면 좀 물어보고 지워라 제발\chromedriver-win64\chromedriver-win64\chromedriver.exe"  # WebDriver의 경로 설정
+        driver_path =r"C:\Users\user\Desktop\shrtordhksenzhd\chromedriver-win64\chromedriver-win64\chromedriver.exe"  # WebDriver의 경로 설정
         service = Service(executable_path=driver_path)
         options = webdriver.ChromeOptions()
         driver = webdriver.Chrome(service=service, options=options)
