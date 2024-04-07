@@ -61,7 +61,7 @@ async def on_message(message):
     if message.content.startswith("(test"):
         music_name = message.content.split("test ")[1]  
         
-        driver_path =r"C:\Users\user\Desktop\shrtordhksenzhd\chromedriver-win64\chromedriver-win64\chromedriver.exe"  # WebDriver의 경로 설정
+        driver_path =r"C:\Users\hsehe\Desktop\한승완 동아리 지울거면 좀 물어보고 지워라 제발\chromedriver-win64\chromedriver-win64\chromedriver.exe"  # WebDriver의 경로 설정
         service = Service(executable_path=driver_path)
         options = webdriver.ChromeOptions()
         driver = webdriver.Chrome(service=service, options=options)
@@ -72,7 +72,7 @@ async def on_message(message):
         thumbnail = parsing_data.find_all('yt-image', {'class': 'style-scope ytd-thumbnail'})
         thumbnail_list = []
         for element in thumbnail:
-            if element.fing('img'):
+            if element.find('img'):
                 thumbnail_list.append(element.find('img').get('src'))
             else:
                 print("None")
@@ -112,24 +112,25 @@ async def on_message(message):
                 if vc.guild == message.guild:
                     voice = vc
         
-        playlist.append([URL,music_title[select_num].text.strip()])
+        playlist.append([URL,music_title[select_num].text.strip(), ])
         
         def play_callback(error):
             try:
-                voice.play(discord>FFmpegPCMAudio(playlist[0][0],**FFMPEG_OPTIONS), after=play_callback)
+                voice.play(discord.FFmpegPCMAudio(playlist[0][0], **FFMPEG_OPTIONS), after=play_callback)
                 playlist.pop(0)
             except:
                 print(f"An error occurred while Playing the audio: {error}")
         
         if not voice.is_playing():
-            playing = embed=discord.Embed(title=f"🎵{playlist[0][1]}", description="Playing",color=0xB66FF)
-            playing.set_image(url=f"{playlist[0][2].png}")
+            playing = discord.Embed(title=f"🎵{playlist[0][1]}", description="Playing",color=0xB66FF)
+            playing.set_image(url=f"{playlist[0][2]}.png")
             await message.channel.send(embed=playing)
             
-            voice.play(discord.FFmpegPCMAudio(playlist[0][0], **FFMPEG_OPTIONS), after=test_function)
+            voice.play(discord.FFmpegPCMAudio(playlist[0][0], **FFMPEG_OPTIONS), after=play_callback)
             playlist.pop(0)
     
         elif voice.is_playing ():
-            await message.channel.send(embed=discord.Embed(title=f"✅ {playlist[-1][1]}",description="Added to the queue",color=0xFF9922))
-
+            playing = discord.Embed(title=f"✅ {playlist[-1][1]}",description="Added to the queue",color=0xFF9922)
+            playing.set_image(url=f"{playlist[-1][2]}.png")
+            await message.channel.send(embed=playing)
 client.run(Token)
