@@ -50,7 +50,7 @@ async def on_message(message):
                 voice = vc
         try:
             voice.stop()
-            await message.channel.send(embed=discord.Embed(title=f"🤚 Stop", description="stop9 the music", color=0xFFFFFF))
+            await message.channel.send(embed=discord.Embed(title=f"🤚 Stop", description="stop the music", color=0xFFFFFF))
         except:
             await message.channel.send(embed=discord.Embed(title=f"😯 NOW", description="Not Playing", color=0xFF992))
     
